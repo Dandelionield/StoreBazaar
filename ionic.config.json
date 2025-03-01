@@ -1,0 +1,7 @@
+{
+  "name": "StoreBazaar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
