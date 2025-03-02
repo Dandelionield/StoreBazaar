@@ -1,0 +1,32 @@
+
+<app-header title="Store Bazaar" [showBackButton]="false"></app-header>
+
+<ion-content [fullscreen]="true">
+
+	@if (products.length > 0){
+
+		<ng-container>
+
+			<ion-grid class="products-grid">
+
+				<ion-row>
+
+					<ion-col>
+
+						@for (product of products; track product.id){
+
+							<app-product-card [product]="product"></app-product-card>
+
+						}
+
+					</ion-col>
+
+				</ion-row>
+
+			</ion-grid>
+
+		</ng-container>
+
+	}
+
+</ion-content>

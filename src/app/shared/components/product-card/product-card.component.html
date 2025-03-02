@@ -1,0 +1,26 @@
+<ion-card class="product-card">
+
+	<ion-img [src]="product.image" [alt]="product.title" class="product-image"></ion-img>
+
+	<ion-card-content class="content">
+
+		<div class="category-label">{{ product.category }}</div>
+		
+		<h2 class="product-title">{{ product.title }}</h2>
+		
+		<div class="price-rating">
+
+			<span class="price">{{ product.price | currency }}</span>
+
+			<div class="rating">
+
+				<span class="rate">★ {{ product.rating.rate }}</span>
+				<span class="count">({{ product.rating.count }})</span>
+
+			</div>
+
+		</div>
+
+	</ion-card-content>
+
+</ion-card>
