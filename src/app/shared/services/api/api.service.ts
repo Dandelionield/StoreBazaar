@@ -10,15 +10,17 @@ import { environment } from '@environments/environment';
 
 }) export class ApiService{
 
-	constructor(private http: HttpClient) {}
+	public sortBy: boolean = true;
 
-	public getAllProducts(sortBy: boolean = true): Observable<Array<Product>>{
+	public constructor(private http: HttpClient) {}
+
+	public getAllProducts(): Observable<Array<Product>>{
 
 		return this.http.get<Array<Product>>(`${environment.baseUrl}${environment.endpoints.products}`, {
 
 			params: {
 
-				sort: sortBy ? "asc" : "desc"
+				sort: this.sortBy ? "asc" : "desc"
 
 			}
 
@@ -52,7 +54,15 @@ import { environment } from '@environments/environment';
 
 	public getProductsByCategory(category: string): Observable<Array<Product>>{
 
-		return this.http.get<Array<Product>>(`${environment.baseUrl}${environment.endpoints.category}/${category}`).pipe(
+		return this.http.get<Array<Product>>(`${environment.baseUrl}${environment.endpoints.category}/${category}`, {
+
+			params: {
+
+				sort: this.sortBy ? "asc" : "desc"
+
+			}
+
+		}).pipe(
 
 			catchError(() => of([ElementNotFound]))
 

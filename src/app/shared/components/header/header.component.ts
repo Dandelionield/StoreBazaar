@@ -13,14 +13,14 @@ import { addIcons } from 'ionicons';
 
 }) export class HeaderComponent implements OnInit {
 
-	@Input() title: string = '';
-	@Input() showBackButton: boolean = true;
+	@Input() public title: string = '';
+	@Input() public showBackButton: boolean = true;
 
-	constructor(private location: Location) {}
+	public constructor(private location: Location) {}
 
-	ngOnInit() {}
+	public ngOnInit(): void {}
 
-	public goBack(){
+	public goBack(): void{
 
 		this.location.back();
 

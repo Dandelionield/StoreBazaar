@@ -8,7 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { ProductCardComponent } from '@components/product-card/product-card.component';
 import { HeaderComponent } from '@components/header/header.component';
 
-import { ApiService } from '@shared/services/api.service';
+import { ApiService } from '@services/api/api.service';
+import { FilterService } from '@services/filter/filter.service';
 
 @NgModule({
 
@@ -35,7 +36,8 @@ import { ApiService } from '@shared/services/api.service';
 
 	], providers: [
 
-		ApiService
+		ApiService,
+		FilterService
 
 	]
 

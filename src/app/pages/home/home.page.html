@@ -1,6 +1,40 @@
 
 <app-header title="Store Bazaar" [showBackButton]="false"></app-header>
 
+<div class="filter-container">
+
+	<div class="sort-control">
+
+		<ion-button fill="clear" (click)="toggleSort()">
+
+			{{ filter.sortBy ? '↑ Price' : '↓ Price' }}
+
+		</ion-button>
+
+	</div>
+	
+	<div class="category-control">
+
+		<ion-select interface="popover" (ionChange)="onCategoryChange($event)" [value]="filter.selectedCategory.value">
+
+			<ion-select-option value="all">All Categories</ion-select-option>
+
+			@for (category of categories; track $index){
+
+				<ion-select-option [value]="category">
+
+					{{ category | titlecase }}
+
+				</ion-select-option>
+
+			}
+
+		</ion-select>
+
+	</div>
+
+</div>
+
 <ion-content [fullscreen]="true">
 
 	@if (products.length > 0){
@@ -11,15 +45,15 @@
 
 				<ion-row>
 
-					<ion-col>
+					@for (product of products; track product.id){
 
-						@for (product of products; track product.id){
+						<ion-col>
 
 							<app-product-card [product]="product"></app-product-card>
 
-						}
+						</ion-col>
 
-					</ion-col>
+					}
 
 				</ion-row>
 

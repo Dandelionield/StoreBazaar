@@ -11,10 +11,10 @@ import { Product, ElementNotFound } from '@models/product.model';
 })
 export class ProductCardComponent implements OnInit {
 
-	@Input() product: Product = ElementNotFound;
+	@Input() public product: Product = ElementNotFound;
 
-	constructor() {}
+	public constructor() {}
 
-	ngOnInit() {}
+	public ngOnInit(): void {}
 
 }
