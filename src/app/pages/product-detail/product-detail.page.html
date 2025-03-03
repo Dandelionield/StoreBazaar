@@ -1,0 +1,84 @@
+<app-header [title]="product.title" [showBackButton]="true"></app-header>
+
+<ion-content [fullscreen]="true" class="product-detail-content">
+
+	@if (product && product.id !== -1){
+		<div class="main-container">
+
+			<div class="product-main">
+
+				<ion-img [src]="product.image" [alt]="product.title" class="product-image"></ion-img>
+				
+				<div class="details-container">
+
+					<h1 class="product-title">{{ product.title }}</h1>
+
+					<div class="category-price">
+
+						<span class="product-category">{{ product.category | titlecase }}</span>
+						<span class="product-price">{{ product.price | currency }}</span>
+
+					</div>
+					
+					<div class="rating">
+
+						<ion-icon name="star" class="star-icon"></ion-icon>
+						<span class="rate">{{ product.rating.rate }}</span>
+						<span class="count">({{ product.rating.count }} reviews)</span>
+
+					</div>
+
+					<p class="product-description">{{ product.description }}</p>
+
+					<ion-button expand="block" (click)="addToCart()" class="add-to-cart-btn">
+
+						<ion-icon slot="start" name="cart"></ion-icon>
+						Añadir al carrito
+
+					</ion-button>
+
+				</div>
+
+			</div>
+
+			@if (relatedProducts.length > 0){
+
+				<div class="related-products">
+
+					<h2 class="related-title">Productos relacionados</h2>
+
+					<ion-grid class="products-grid">
+
+						<ion-row>
+
+							@for (product of relatedProducts; track product.id){
+
+								<ion-col size="12" size-md="6" size-lg="4" size-xl="3">
+
+									<app-product-card [product]="product"></app-product-card>
+
+								</ion-col>
+							}
+
+						</ion-row>
+
+					</ion-grid>
+
+				</div>
+
+			}
+
+		</div>
+
+	}@else if (product.id === -1){
+
+		<div class="not-found">
+
+			<ion-icon name="sad-outline" class="error-icon"></ion-icon>
+			<h2>Producto no encontrado</h2>
+
+		</div>
+
+	}
+
+</ion-content>

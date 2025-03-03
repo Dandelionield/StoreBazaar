@@ -7,18 +7,30 @@ import { BehaviorSubject } from 'rxjs';
 
 }) export class FilterService{
 
-	public sortBy: boolean = true;
-	public selectedCategory = new BehaviorSubject<string>('all');
+	private sortOrder: boolean = true;
+	private selectedCategory = new BehaviorSubject<string>('all');
 
 	public constructor() {}
 
-	public updateSortOrder(): void {
+	public getSortOrder(): boolean{
 
-		this.sortBy = !this.sortBy;
+		return this.sortOrder;
 
 	}
 
-	public updateCategory(category: string): void {
+	public getSelectedCategory(): string{
+
+		return this.selectedCategory.value;
+
+	}
+
+	public updateSortOrder(): void{
+
+		this.sortOrder = !this.sortOrder;
+
+	}
+
+	public updateCategory(category: string): void{
 
 		this.selectedCategory.next(category);
 

@@ -6,7 +6,7 @@ export const ElementNotFound: Product = {
 	price: 0,
 	category: "None",
 	description: "Lorem ipsum dolor sit amet",
-	image: '@assets\icon\image-not-found.png',
+	image: '@assets/icon/image-not-found.png',
 	rating: {
 
 		rate: 0,

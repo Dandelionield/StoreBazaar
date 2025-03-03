@@ -32,3 +32,94 @@ app-product-card{
 	}
 
 }
+
+.filter-container{
+
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+	padding: 1rem 1.5rem;
+	background: rgb(0, 0, 0, 0);
+	border-bottom: 1px solid var(--ion-color-light-shade);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	
+	.sort-control{
+
+		flex-shrink: 0;
+		
+		ion-button{
+
+			--padding-start: 0.75rem;
+			--padding-end: 0.75rem;
+			--border-radius: 8px;
+			font-weight: 500;
+			letter-spacing: 0.5px;
+			color: white;
+			
+			&:hover{
+
+				background: rgba(var(--ion-color-primary-rgb), 0.1);
+
+			}
+
+		}
+
+	}
+
+	.category-control{
+
+		flex-grow: 1;
+		
+		ion-select{
+
+			width: 100%;
+			--padding-start: 0.5rem;
+			--padding-end: 0.5rem;
+			--placeholder-color: var(--ion-color-medium);
+			--placeholder-opacity: 0.8;
+			
+			&::part(icon){
+
+				color: var(--ion-color-medium);
+
+			}
+
+		}
+		
+		ion-select-option{
+
+			font-size: 0.9rem;
+
+		}
+
+	}
+
+	@media (max-width: 576px){
+
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 1rem;
+		
+		.sort-control{
+
+			width: 100%;
+			
+			ion-button{
+
+				width: 100%;
+				justify-content: center;
+				color: white;
+
+			}
+
+		}
+		
+		.category-control{
+
+			width: 100%;
+
+		}
+
+	}
+
+}

@@ -5,9 +5,9 @@
 
 	<div class="sort-control">
 
-		<ion-button fill="clear" (click)="toggleSort()">
+		<ion-button fill="empty" (click)="toggleSort()">
 
-			{{ filter.sortBy ? '↑ Price' : '↓ Price' }}
+			{{ getFilter().getSortOrder() ? '↑ Price' : '↓ Price' }}
 
 		</ion-button>
 
@@ -15,7 +15,7 @@
 	
 	<div class="category-control">
 
-		<ion-select interface="popover" (ionChange)="onCategoryChange($event)" [value]="filter.selectedCategory.value">
+		<ion-select interface="popover" (ionChange)="onCategoryChange($event)" [value]="getFilter().getSelectedCategory()">
 
 			<ion-select-option value="all">All Categories</ion-select-option>
 

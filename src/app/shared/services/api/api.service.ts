@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import { Product, ElementNotFound } from '@models/product.model';
 import { environment } from '@environments/environment';
+import { FilterService } from '@services/filter/filter.service';
 
 @Injectable({
 
@@ -12,7 +13,7 @@ import { environment } from '@environments/environment';
 
 	public sortBy: boolean = true;
 
-	public constructor(private http: HttpClient) {}
+	public constructor(private http: HttpClient, public filter: FilterService) {}
 
 	public getAllProducts(): Observable<Array<Product>>{
 
@@ -20,7 +21,7 @@ import { environment } from '@environments/environment';
 
 			params: {
 
-				sort: this.sortBy ? "asc" : "desc"
+				sort: this.filter.getSortOrder() ? "asc" : "desc"
 
 			}
 
@@ -52,13 +53,13 @@ import { environment } from '@environments/environment';
 
 	}
 
-	public getProductsByCategory(category: string): Observable<Array<Product>>{
+	public getProductsByCategory(category: string = this.filter.getSelectedCategory()): Observable<Array<Product>>{
 
 		return this.http.get<Array<Product>>(`${environment.baseUrl}${environment.endpoints.category}/${category}`, {
 
 			params: {
 
-				sort: this.sortBy ? "asc" : "desc"
+				sort: this.filter.getSortOrder() ? "asc" : "desc"
 
 			}
 

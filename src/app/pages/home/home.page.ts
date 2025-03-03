@@ -15,22 +15,26 @@ import { FilterService } from '@services/filter/filter.service';
 	public products: Array<Product> = [];
 	public categories: Array<string> = [];
 
-	public constructor(private api: ApiService, public filter: FilterService) {}
+	public constructor(private api: ApiService) {}
+
+	public getFilter(): FilterService{
+
+		return this.api.filter;
+
+	}
 
 	public async ngOnInit(): Promise<void>{
 
 		this.loadCategories();
-		this.loadProducts(this.filter.selectedCategory.value);
+		this.loadProducts();
 
 	}
 
-	private async loadProducts(category: string): Promise<void>{
+	private async loadProducts(): Promise<void>{
 
-		this.api.sortBy = this.filter.sortBy;
+		if (this.api.filter.getSelectedCategory()!='all'){
 
-		if (category!='all'){
-
-			this.loadFilteredProducts(category);
+			this.loadFilteredProducts();
 
 		}else{
 
@@ -40,14 +44,13 @@ import { FilterService } from '@services/filter/filter.service';
 
 	}
 
-	private async loadFilteredProducts(category: string): Promise<void>{
+	private async loadFilteredProducts(): Promise<void>{
 
-		await this.api.getProductsByCategory(category).subscribe({
+		await this.api.getProductsByCategory().subscribe({
 
 			next: (products) => {
 
 				this.products = products;
-				console.log(this.products);
 
 			}, error: (e) => {
 
@@ -97,18 +100,17 @@ import { FilterService } from '@services/filter/filter.service';
 
 	public toggleSort(): void {
 
-		this.filter.updateSortOrder();
-		this.loadProducts(this.filter.selectedCategory.value);
+		this.api.filter.updateSortOrder();
+		this.loadProducts();
 
 	}
 
 	public onCategoryChange(event: Event): void {
 
 		const select = event.target as HTMLSelectElement;
-		this.filter.updateCategory(select.value);
+		this.api.filter.updateCategory(select.value);
 
-		console.log(this.filter.selectedCategory.value);
-		this.loadProducts(this.filter.selectedCategory.value);
+		this.loadProducts();
 
 	}
 

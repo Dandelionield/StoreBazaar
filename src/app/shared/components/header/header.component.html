@@ -6,7 +6,7 @@
 
 			<ion-buttons slot="start">
 
-				<ion-button (click)="goBack()" fill="clear" class="back-button">
+				<ion-button (click)="goBack()" fill="empty" class="back-button">
 
 					<ion-icon name="arrow-back" slot="icon-only"></ion-icon>
 
@@ -17,6 +17,18 @@
 		}
 		
 		<ion-title class="title">{{ title }}</ion-title>
+
+		<ion-buttons slot="end">
+
+			<ion-button [routerLink]="['/cart']" fill="empty" class="cart-button">
+
+				<ion-icon name="cart" slot="icon-only"></ion-icon>
+
+				<!--<ion-badge fill="empty" class="cart-badge">{{ cartItemCount }}</ion-badge>-->
+
+			</ion-button>
+
+		</ion-buttons>
 		
 		<ng-content></ng-content>
 
