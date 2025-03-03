@@ -24,7 +24,18 @@ const routes: Routes = [
 		path: 'cart',
 		loadChildren: () => import('./pages/cart-detail/cart-detail.module').then( m => m.CartDetailPageModule)
 
+	},{
+
+		path: 'payment',
+		loadChildren: () => import('./pages/payment/payment.module').then( m => m.PaymentPageModule)
+
+	},{
+
+		path: 'receipt',
+		loadChildren: () => import('./pages/receipt/receipt.module').then( m => m.ReceiptPageModule)
+
 	},
+
 
 ];
 

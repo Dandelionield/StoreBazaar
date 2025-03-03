@@ -57,7 +57,15 @@ import { CartItem } from '@models/cart.model';
 
 		this.items = this.items.filter(item => item.product.id !== id);
 
-		this.saveCartToStorage();
+		if (this.items.length!==0){
+
+			this.saveCartToStorage();
+
+		}else{
+
+			this.clearCart();
+
+		}
 
 	}
 

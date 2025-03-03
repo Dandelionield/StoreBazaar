@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProductCardComponent } from '@components/product-card/product-card.component';
 import { HeaderComponent } from '@components/header/header.component';
@@ -12,6 +13,8 @@ import { HeaderComponent } from '@components/header/header.component';
 import { ApiService } from '@services/api/api.service';
 import { FilterService } from '@services/filter/filter.service';
 import { CartService } from '@services/cart/cart.service';
+
+import { PaymentController } from '@controllers/payment/payment.controller';
 
 @NgModule({
 
@@ -26,7 +29,8 @@ import { CartService } from '@services/cart/cart.service';
 		IonicModule.forRoot(),
 		FormsModule,
 		RouterModule,
-		HttpClientModule
+		HttpClientModule,
+		ReactiveFormsModule
 
 	], exports: [
 
@@ -36,13 +40,15 @@ import { CartService } from '@services/cart/cart.service';
 		IonicModule,
 		FormsModule,
 		RouterModule,
-		HttpClientModule
+		HttpClientModule,
+		ReactiveFormsModule
 
 	], providers: [
 
 		ApiService,
 		FilterService,
-		CartService
+		CartService,
+		PaymentController
 
 	]
 

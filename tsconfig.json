@@ -8,6 +8,7 @@
 		"@environments/*": ["src/environments/*"],
 		"@shared/*": ["src/app/shared/*"],
 		"@services/*": ["src/app/shared/services/*"],
+		"@controllers/*": ["src/app/shared/services/controllers/*"],
 		"@components/*": ["src/app/shared/components/*"],
 		"@models/*": ["src/app/models/*"],
 		"assets/*": ["src/assets/*"]
