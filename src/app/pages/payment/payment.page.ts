@@ -4,7 +4,7 @@ import { PaymentController } from '@controllers/payment/payment.controller';
 import { Cart } from '@models/cart.model';
 import { User } from '@models/user.model';
 import { Receipt } from '@models/receipt.model';
-import { LoadingService } from '@services/loading/loading.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
 
@@ -18,7 +18,7 @@ import { LoadingService } from '@services/loading/loading.service';
 	public cart: Cart;
 	public paymentForm = this.paymentController.createPaymentForm();
 
-	public constructor(private router: Router, private paymentController: PaymentController, private load: LoadingService){
+	public constructor(private router: Router, private paymentController: PaymentController, private toastCtrl: ToastController){
 
 		const navigation = this.router.getCurrentNavigation();
 		this.cart = navigation?.extras.state?.['cart'];
@@ -27,14 +27,32 @@ import { LoadingService } from '@services/loading/loading.service';
 
 	public ngOnInit(): void{}
 
-	public handleSubmit(): void{
+	public async handleSubmit(): Promise<void>{
 
 		if (this.paymentForm.valid && this.cart){
 
-			this.load.showLoading({
+			const toast = await this.toastCtrl.create({
 
+				message: '✅ Procesando pago',
 				duration: 3000,
-				redirectTo: '/receipt',
+				position: 'top',
+				color: 'success',
+				cssClass: 'custom-toast',
+				buttons: [{
+
+					icon: 'close',
+					role: 'cancel'
+
+				}]
+
+			});
+			
+			await toast.present();
+
+			await new Promise(resolve => setTimeout(resolve, 3000));
+
+			this.router.navigate(['/receipt'],{
+
 				state: {
 
 					receipt: {
@@ -59,8 +77,6 @@ import { LoadingService } from '@services/loading/loading.service';
 				}
 
 			});
-
-			this.router.navigate(['/loading']);
 
 		}
 
