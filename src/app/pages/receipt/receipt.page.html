@@ -1,53 +1,83 @@
-<app-header title="Factura de Compra" [showBackButton]="true"></app-header>
+<app-header title="Receipt" [showBackButton]="false"></app-header>
 
 <ion-content class="receipt-content">
+
 	<ion-card class="receipt-card">
+
 		<ion-card-header>
-			<ion-card-title class="receipt-title">Factura #{{ receipt.cart.items.length }}-{{ formattedDate }}</ion-card-title>
+
+			<ion-card-title class="receipt-title">Receipt #{{ receipt.cart.items.length }}-{{ formattedDate }}</ion-card-title>
+
 		</ion-card-header>
 
 		<ion-card-content>
-			<!-- Información del Cliente -->
+
 			<div class="section">
-				<h2 class="section-title">Información del Cliente</h2>
+
+				<h2 class="section-title">Client Information</h2>
+
 				<div class="user-info">
+
 					<p>{{ receipt.user.name }} {{ receipt.user.surname }}</p>
 					<p>{{ receipt.user.address }}</p>
 					<p>{{ receipt.user.city }}, {{ receipt.user.country }}</p>
 					<p>Tarjeta: {{ maskedCard }}</p>
+
 				</div>
+
 			</div>
 
-			<!-- Detalles de la Compra -->
 			<div class="section">
-				<h2 class="section-title">Detalles de la Compra</h2>
+
+				<h2 class="section-title">Buyout Details</h2>
+
 				<ion-list lines="none">
+
 					<ion-item *ngFor="let item of receipt.cart.items">
+
 						<ion-label class="item-name">{{ item.product.title }}</ion-label>
+
 						<ion-note slot="end" class="item-price">
+
 							{{ item.quantity }} x {{ item.product.price | currency }}
+
 						</ion-note>
+
 					</ion-item>
+
 				</ion-list>
+
 			</div>
 
-			<!-- Total -->
 			<div class="total-section">
+
 				<ion-item>
+
 					<ion-label class="total-label">Total:</ion-label>
+
 					<ion-note slot="end" class="total-amount">
+
 						{{ receipt.cart.total | currency }}
+
 					</ion-note>
+
 				</ion-item>
+
 			</div>
 
-			<!-- Acciones -->
 			<div class="actions">
+
 				<ion-button fill="solid" (click)="printReceipt()">
+
 					<ion-icon name="print" slot="start"></ion-icon>
 					Imprimir
+
 				</ion-button>
+
 			</div>
+
 		</ion-card-content>
+
 	</ion-card>
+
 </ion-content>

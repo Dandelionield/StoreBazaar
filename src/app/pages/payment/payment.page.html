@@ -1,140 +1,221 @@
 <ion-content class="payment-container">
+
 	<form [formGroup]="paymentForm" (ngSubmit)="handleSubmit()">
-		<!-- Sección Información Personal -->
+
 		<ion-card class="form-section">
+
 			<ion-card-header>
-				<ion-card-title>Información Personal</ion-card-title>
+
+				<ion-card-title>Personal Information</ion-card-title>
+
 			</ion-card-header>
 			
 			<ion-card-content>
+
 				<ion-grid>
-					<!-- Nombre -->
+
 					<ion-row>
+
 						<ion-col size="12" size-md="6">
+
 							<ion-item>
-								<ion-label position="floating">Nombre</ion-label>
+
+								<ion-label position="floating">Name</ion-label>
 								<ion-input formControlName="firstName"></ion-input>
+
 							</ion-item>
-							@if (paymentForm.get('firstName')?.invalid && (paymentForm.get('firstName')?.dirty || paymentForm.get('firstName')?.touched)) {
-								<ion-note color="danger">Campo requerido</ion-note>
+
+							@if (paymentForm.get('firstName')?.invalid && (paymentForm.get('firstName')?.dirty || paymentForm.get('firstName')?.touched)){
+
+								<ion-note color="danger">Required paramether</ion-note>
+
 							}
+
 						</ion-col>
 						
-						<!-- Apellido -->
 						<ion-col size="12" size-md="6">
+
 							<ion-item>
-								<ion-label position="floating">Apellido</ion-label>
+
+								<ion-label position="floating">Last Name</ion-label>
 								<ion-input formControlName="lastName"></ion-input>
+
 							</ion-item>
-							@if (paymentForm.get('lastName')?.invalid && (paymentForm.get('lastName')?.dirty || paymentForm.get('lastName')?.touched)) {
-								<ion-note color="danger">Campo requerido</ion-note>
+
+							@if (paymentForm.get('lastName')?.invalid && (paymentForm.get('lastName')?.dirty || paymentForm.get('lastName')?.touched)){
+
+								<ion-note color="danger">Required paramether</ion-note>
+
 							}
+
 						</ion-col>
+
 					</ion-row>
 
-					<!-- País y Ciudad -->
 					<ion-row>
+
 						<ion-col size="12" size-md="6">
+
 							<ion-item>
-								<ion-label position="floating">País</ion-label>
+
+								<ion-label position="floating">Country</ion-label>
 								<ion-input formControlName="country"></ion-input>
+
 							</ion-item>
-							@if (paymentForm.get('country')?.invalid && (paymentForm.get('country')?.dirty || paymentForm.get('country')?.touched)) {
-								<ion-note color="danger">Campo requerido</ion-note>
+
+							@if (paymentForm.get('country')?.invalid && (paymentForm.get('country')?.dirty || paymentForm.get('country')?.touched)){
+
+								<ion-note color="danger">Required paramether</ion-note>
+
 							}
+
 						</ion-col>
 						
 						<ion-col size="12" size-md="6">
+
 							<ion-item>
-								<ion-label position="floating">Ciudad</ion-label>
+
+								<ion-label position="floating">City</ion-label>
 								<ion-input formControlName="city"></ion-input>
+
 							</ion-item>
-							@if (paymentForm.get('city')?.invalid && (paymentForm.get('city')?.dirty || paymentForm.get('city')?.touched)) {
-								<ion-note color="danger">Campo requerido</ion-note>
+
+							@if (paymentForm.get('city')?.invalid && (paymentForm.get('city')?.dirty || paymentForm.get('city')?.touched)){
+
+								<ion-note color="danger">Required paramether</ion-note>
+
 							}
+
 						</ion-col>
+
 					</ion-row>
 
-					<!-- Dirección -->
 					<ion-row>
+
 						<ion-col size="12">
+
 							<ion-item>
-								<ion-label position="floating">Dirección</ion-label>
+
+								<ion-label position="floating">Address</ion-label>
 								<ion-textarea formControlName="address"></ion-textarea>
+
 							</ion-item>
-							@if (paymentForm.get('address')?.invalid && (paymentForm.get('address')?.dirty || paymentForm.get('address')?.touched)) {
-								<ion-note color="danger">Campo requerido</ion-note>
+
+							@if (paymentForm.get('address')?.invalid && (paymentForm.get('address')?.dirty || paymentForm.get('address')?.touched)){
+
+								<ion-note color="danger">Required paramether</ion-note>
+
 							}
+
 						</ion-col>
+
 					</ion-row>
+
 				</ion-grid>
+
 			</ion-card-content>
+
 		</ion-card>
 
-		<!-- Sección Datos de Pago -->
 		<ion-card class="form-section">
+
 			<ion-card-header>
-				<ion-card-title>Información de Pago</ion-card-title>
+
+				<ion-card-title>Payment Information</ion-card-title>
+
 			</ion-card-header>
 			
 			<ion-card-content>
+
 				<ion-grid>
+
 					<ion-row>
-						<!-- Número de Tarjeta -->
+
 						<ion-col size="12" size-md="6">
+
 							<ion-item>
-								<ion-label position="floating">Número de Tarjeta</ion-label>
+
+								<ion-label position="floating">Card Number</ion-label>
 								<ion-input formControlName="cardNumber" type="tel"></ion-input>
+
 							</ion-item>
-							@if (paymentForm.get('cardNumber')?.errors?.['invalidCard']) {
+
+							@if (paymentForm.get('cardNumber')?.errors?.['invalidCard']){
+
 								<ion-note color="danger">16 dígitos requeridos</ion-note>
+
 							}
-							@if (paymentForm.get('cardNumber')?.errors?.['required']) {
+
+							@if (paymentForm.get('cardNumber')?.errors?.['required']){
+
 								<ion-note color="danger">Campo requerido</ion-note>
+
 							}
+
 						</ion-col>
 						
-						<!-- CVC -->
 						<ion-col size="12" size-md="3">
+
 							<ion-item>
+
 								<ion-label position="floating">CVC</ion-label>
 								<ion-input formControlName="cvc" type="tel"></ion-input>
+
 							</ion-item>
-							@if (paymentForm.get('cvc')?.errors?.['invalidCvc']) {
+
+							@if (paymentForm.get('cvc')?.errors?.['invalidCvc']){
+
 								<ion-note color="danger">3 dígitos requeridos</ion-note>
+
 							}
-							@if (paymentForm.get('cvc')?.errors?.['required']) {
+
+							@if (paymentForm.get('cvc')?.errors?.['required']){
+
 								<ion-note color="danger">Campo requerido</ion-note>
+
 							}
+
 						</ion-col>
 						
-						<!-- Fecha de Vencimiento -->
 						<ion-col size="12" size-md="3">
+
 							<ion-item>
+
 								<ion-label position="floating">MM/AA</ion-label>
+
 								<ion-input formControlName="expiry" placeholder="MM/AA"></ion-input>
+
 							</ion-item>
-							@if (paymentForm.get('expiry')?.errors?.['invalidExpiry']) {
+
+							@if (paymentForm.get('expiry')?.errors?.['invalidExpiry']){
+
 								<ion-note color="danger">Formato inválido</ion-note>
+
 							}
-							@if (paymentForm.get('expiry')?.errors?.['required']) {
+
+							@if (paymentForm.get('expiry')?.errors?.['required']){
+
 								<ion-note color="danger">Campo requerido</ion-note>
+
 							}
+
 						</ion-col>
+
 					</ion-row>
+
 				</ion-grid>
+
 			</ion-card-content>
+
 		</ion-card>
 
-		<!-- Botón de Submit -->
-		<ion-button 
-			type="submit" 
-			expand="block" 
-			[disabled]="!paymentForm.valid" 
-			class="submit-button"
-		>
+		<ion-button type="submit" expand="block" [disabled]="!paymentForm.valid" class="submit-button">
+
 			<ion-icon name="card" slot="start"></ion-icon>
-			Pagar {{ cart.total | currency }}
+			Pay {{ cart.total | currency }}
+
 		</ion-button>
+
 	</form>
+
 </ion-content>

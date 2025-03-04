@@ -9,10 +9,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProductCardComponent } from '@components/product-card/product-card.component';
 import { HeaderComponent } from '@components/header/header.component';
+import { ItemComponent } from '@components/item/item.component';
 
 import { ApiService } from '@services/api/api.service';
 import { FilterService } from '@services/filter/filter.service';
 import { CartService } from '@services/cart/cart.service';
+import { LoadingService } from '@services/loading/loading.service';
 
 import { PaymentController } from '@controllers/payment/payment.controller';
 
@@ -21,7 +23,8 @@ import { PaymentController } from '@controllers/payment/payment.controller';
 	declarations: [
 
 		ProductCardComponent,
-		HeaderComponent
+		HeaderComponent,
+		ItemComponent
 
 	], imports: [
 
@@ -36,6 +39,7 @@ import { PaymentController } from '@controllers/payment/payment.controller';
 
 		ProductCardComponent,
 		HeaderComponent,
+		ItemComponent,
 		CommonModule,
 		IonicModule,
 		FormsModule,
@@ -48,6 +52,7 @@ import { PaymentController } from '@controllers/payment/payment.controller';
 		ApiService,
 		FilterService,
 		CartService,
+		LoadingService,
 		PaymentController
 
 	]

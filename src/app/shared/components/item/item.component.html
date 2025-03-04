@@ -1,0 +1,29 @@
+<!--<ion-item class="cart-item">-->
+	
+	<div class="item-controls" slot="end">
+
+		<app-product-card [product]="item.product"></app-product-card>
+
+		<div class="quantity-container">
+
+			<span>Quantity:</span>
+
+			<ion-input type="number"  [value]="item.quantity"  min="1"  (ionChange)="updateQuantity(item.product.id, $event)" class="quantity-input"></ion-input>
+
+		</div>
+
+		<div class="total-price">
+
+			Total: {{ item.product.price * item.quantity | currency }}
+
+		</div>
+
+		<ion-button fill="clear" color="danger" (click)="removeItem(item.product.id)">
+
+			<ion-icon name="trash" slot="icon-only"></ion-icon>
+
+		</ion-button>
+
+	</div>
+
+<!--</ion-item>-->

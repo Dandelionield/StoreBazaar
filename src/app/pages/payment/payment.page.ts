@@ -4,6 +4,7 @@ import { PaymentController } from '@controllers/payment/payment.controller';
 import { Cart } from '@models/cart.model';
 import { User } from '@models/user.model';
 import { Receipt } from '@models/receipt.model';
+import { LoadingService } from '@services/loading/loading.service';
 
 @Component({
 
@@ -17,7 +18,7 @@ import { Receipt } from '@models/receipt.model';
 	public cart: Cart;
 	public paymentForm = this.paymentController.createPaymentForm();
 
-	public constructor(private router: Router, private paymentController: PaymentController){
+	public constructor(private router: Router, private paymentController: PaymentController, private load: LoadingService){
 
 		const navigation = this.router.getCurrentNavigation();
 		this.cart = navigation?.extras.state?.['cart'];
@@ -30,8 +31,10 @@ import { Receipt } from '@models/receipt.model';
 
 		if (this.paymentForm.valid && this.cart){
 
-			this.router.navigate(['/receipt'], {
+			this.load.showLoading({
 
+				duration: 3000,
+				redirectTo: '/receipt',
 				state: {
 
 					receipt: {
@@ -56,6 +59,8 @@ import { Receipt } from '@models/receipt.model';
 				}
 
 			});
+
+			this.router.navigate(['/loading']);
 
 		}
 

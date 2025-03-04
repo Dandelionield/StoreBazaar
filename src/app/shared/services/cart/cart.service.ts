@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Product } from '@models/product.model';
 import { CartItem } from '@models/cart.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
 
@@ -9,7 +11,7 @@ import { CartItem } from '@models/cart.model';
 }) export class CartService{
 
 	private readonly STORAGE_KEY = 'cartItems';
-	private items: Array<CartItem> = [];
+	private items: BehaviorSubject<Array<CartItem>> = new BehaviorSubject<Array<CartItem>>([]);
 
 	public constructor(){
 
@@ -20,19 +22,20 @@ import { CartItem } from '@models/cart.model';
 	public loadCartFromStorage(): void{
 
 		const storedItems = localStorage.getItem(this.STORAGE_KEY);
-		this.items = storedItems ? JSON.parse(storedItems) : [];
+		this.items.next(storedItems ? JSON.parse(storedItems) : []);
 
 	}
 
 	private saveCartToStorage(): void{
 
-		localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.items));
+		localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.items.value));
 
 	}
 
 	public addToCart(product: Product): void{
 
-		const existingItem = this.items.find(item => item.product.id === product.id);
+		const currentItems = [...this.items.value];
+		const existingItem = currentItems.find(item => item.product.id === product.id);
 		
 		if (existingItem){
 
@@ -40,14 +43,17 @@ import { CartItem } from '@models/cart.model';
 
 		}else{
 
-			this.items.push({
+			currentItems.push({
 
 				product: product,
 				quantity: 1
 
 			});
 
+			this.items.next(currentItems);
+
 		}
+
 		
 		this.saveCartToStorage();
 
@@ -55,9 +61,10 @@ import { CartItem } from '@models/cart.model';
 
 	public removeFromCart(id: number): void{
 
-		this.items = this.items.filter(item => item.product.id !== id);
+		const currentItems = [...this.items.value];
+		this.items.next(currentItems.filter(item => item.product.id !== id));
 
-		if (this.items.length!==0){
+		if (currentItems.length!==0){
 
 			this.saveCartToStorage();
 
@@ -71,11 +78,13 @@ import { CartItem } from '@models/cart.model';
 
 	public updateQuantity(id: number, newQuantity: number): void{
 
-		const item = this.items.find(item => item.product.id === id);
+		const currentItems = [...this.items.value];
+		const item = currentItems.find(item => item.product.id === id);
 
 		if (item){
 
 			item.quantity = newQuantity > 0 ? newQuantity : 1;
+			this.items.next(currentItems);
 			this.saveCartToStorage();
 
 		}
@@ -91,19 +100,29 @@ import { CartItem } from '@models/cart.model';
 
 	public getCartItems(): Array<CartItem>{
 
-		return [...this.items];
+		return [...this.items.value];
 
 	}
 
 	public getTotalItems(): number{
 
-		return this.items.reduce((acc, item) => acc + item.quantity, 0);
+		return this.items.value.reduce((acc, item) => acc + item.quantity, 0);
+
+	}
+
+	public getTotalItems$(): Observable<number>{
+
+		return this.items.pipe(
+
+			map(items => items.reduce((acc, item) => acc + item.quantity, 0))
+
+		);
 
 	}
 
 	public getTotalPrice(): number{
 
-		return this.items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+		return this.items.value.reduce((total, item) => total + (item.product.price * item.quantity), 0);
 
 	}
 

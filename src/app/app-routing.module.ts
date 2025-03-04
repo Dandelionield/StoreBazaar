@@ -5,13 +5,18 @@ const routes: Routes = [
 
 	{
 
+		path: 'loading',
+		loadChildren: () => import('./pages/loading/loading.module').then( m => m.LoadingPageModule)
+
+	},{
+
 		path: 'home',
 		loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
 
 	},{
 
 		path: '',
-		redirectTo: 'home',
+		redirectTo: 'loading',
 		pathMatch: 'full'
 
 	},{
@@ -35,6 +40,7 @@ const routes: Routes = [
 		loadChildren: () => import('./pages/receipt/receipt.module').then( m => m.ReceiptPageModule)
 
 	},
+
 
 
 ];

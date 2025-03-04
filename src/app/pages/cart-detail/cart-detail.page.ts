@@ -3,6 +3,7 @@ import { CartService } from '@services/cart/cart.service';
 import { CartItem } from '@models/cart.model';
 import { Router } from '@angular/router';
 import { instanceCart } from '@models/cart.model';
+import { ToastController } from '@ionic/angular';
 
 @Component({
 
@@ -13,7 +14,7 @@ import { instanceCart } from '@models/cart.model';
 
 }) export class CartDetailPage implements OnInit, OnDestroy {
 
-	public constructor(public cart: CartService, private router: Router){}
+	public constructor(public cart: CartService, private router: Router, private toastCtrl: ToastController){}
 
 	public ngOnInit(): void{
 
@@ -27,20 +28,27 @@ import { instanceCart } from '@models/cart.model';
 
 	}
 
-	public updateQuantity(id: number, event: any): void{
+	public async checkout(): Promise<void>{
 
-		const quantity = Number(event.detail.value);
-		this.cart.updateQuantity(id, quantity);
+		const toast = await this.toastCtrl.create({
 
-	}
+			message: '✅ Procesando pago',
+			duration: 2000,
+			position: 'top',
+			color: 'success',
+			cssClass: 'custom-toast',
+			buttons: [{
 
-	public removeItem(id: number): void{
+				icon: 'close',
+				role: 'cancel'
 
-		this.cart.removeFromCart(id);
+			}]
 
-	}
+		});
+		
+		await toast.present();
 
-	public checkout(): void{
+		await new Promise(resolve => setTimeout(resolve, 2000));
 
 		this.router.navigate(['/payment'], {
 
