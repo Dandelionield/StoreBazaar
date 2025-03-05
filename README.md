@@ -7,15 +7,15 @@ Modern e-commerce application with dynamic shopping cart, payment processing, an
 
 ### Home Page
 
-![Demo Screenshot](src/assets/screenshots/home.png)
+![Demo Screenshot](src/assets/screenshots/home.PNG)
 
 ### Cart Page
 
-![Demo Screenshot](src/assets/screenshots/cart.png)
+![Demo Screenshot](src/assets/screenshots/cart.PNG)
 
 ### Product Page
 
-![Demo Screenshot](src/assets/screenshots/product.png)
+![Demo Screenshot](src/assets/screenshots/product.PNG)
 
 ## Key Features ✨
 - 🛍️ **Smart Cart System**
