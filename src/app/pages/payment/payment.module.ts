@@ -14,5 +14,4 @@ import { RouterModule } from '@angular/router';
 
 	], declarations: [PaymentPage]
 
-})
-export class PaymentPageModule {}
+}) export class PaymentPageModule {}

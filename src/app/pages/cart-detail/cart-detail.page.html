@@ -10,7 +10,7 @@
 
 				@for (item of cart.getCartItems(); track item.product.id; let i = $index){
 
-					<ion-col size="2">
+					<ion-col size="8" class="total-section">
 
 						<app-item [item]="item" ></app-item>
 
@@ -60,7 +60,7 @@
 
 			<h2>Your cart is empty</h2>
 
-			<ion-button [routerLink]="['/']">Keep Shopping</ion-button>
+			<ion-button [routerLink]="['/home']">Keep Shopping</ion-button>
 
 		</div>
 

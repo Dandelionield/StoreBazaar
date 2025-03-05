@@ -18,7 +18,7 @@ import { ToastController } from '@ionic/angular';
 	public cart: Cart;
 	public paymentForm = this.paymentController.createPaymentForm();
 
-	public constructor(private router: Router, private paymentController: PaymentController, private toastCtrl: ToastController){
+	public constructor(private router: Router, private paymentController: PaymentController){
 
 		const navigation = this.router.getCurrentNavigation();
 		this.cart = navigation?.extras.state?.['cart'];
@@ -31,42 +31,28 @@ import { ToastController } from '@ionic/angular';
 
 		if (this.paymentForm.valid && this.cart){
 
-			const toast = await this.toastCtrl.create({
-
-				message: '✅ Procesando pago',
-				duration: 3000,
-				position: 'top',
-				color: 'success',
-				cssClass: 'custom-toast',
-				buttons: [{
-
-					icon: 'close',
-					role: 'cancel'
-
-				}]
-
-			});
-			
-			await toast.present();
-
-			await new Promise(resolve => setTimeout(resolve, 3000));
-
-			this.router.navigate(['/receipt'],{
+			this.router.navigate(['/loading'],{
 
 				state: {
 
-					receipt: {
+					duration: 3000,
+					redirectTo: '/receipt',
+					data: {
 
-						cart: this.cart,
-						user: {
+						receipt: {
 
-							...this.paymentForm.value,
+							cart: this.cart,
+							user: {
 
-							card: {
+								...this.paymentForm.value,
 
-								digits: this.paymentForm.value.cardNumber,
-								cvc: this.paymentForm.value.cvc,
-								expire: new Date()
+								card: {
+
+									digits: this.paymentForm.value.cardNumber,
+									cvc: this.paymentForm.value.cvc,
+									expire: new Date()
+
+								}
 
 							}
 

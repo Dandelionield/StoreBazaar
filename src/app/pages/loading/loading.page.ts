@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LoadingService } from '@services/loading/loading.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
 
@@ -11,46 +9,42 @@ import { Subscription } from 'rxjs';
 	standalone: false
 
 })
-export class LoadingPage implements OnInit, OnDestroy {
+export class LoadingPage implements OnInit {//, OnDestroy {
 
-	private subscription!: Subscription;
+	private config: {
 
-	public constructor(private load: LoadingService, private router: Router) {}
+		duration: number;
+		redirectTo: string;
+		data?: any;
 
-	public async ngOnInit(): Promise<void>{
+	};
 
-		this.load.showLoading({
+	public constructor(private router: Router) {
 
-			duration: 3000,
-			redirectTo: '/home'
-
-		});
-
-		await new Promise(resolve => setTimeout(resolve, 3000));
-
-		this.subscription = this.load.getLoadingConfig().subscribe(config => {
-
-			if (config.show && config.redirectTo){
-
-				this.router.navigate([config.redirectTo],{
-
-					state: config.state || {}
-
-				});
-
-			}
-
-		});
+		const navigation = this.router.getCurrentNavigation();
+		this.config = navigation?.extras.state as any;
 
 	}
 
-	public ngOnDestroy(): void{
+	public async ngOnInit(): Promise<void>{
 
-		if (this.subscription){
+		const defaultConfig = {
 
-			this.subscription.unsubscribe();
+			duration: 3000,
+			redirectTo: '/home',
+			data: {}
 
-		}
+		};
+
+		const finalConfig = this.config || defaultConfig;
+
+		await new Promise(resolve => setTimeout(resolve, finalConfig.duration));
+
+		this.router.navigate([finalConfig.redirectTo], {
+
+			state: finalConfig.data
+
+		});
 
 	}
 

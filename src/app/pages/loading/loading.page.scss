@@ -1,35 +1,50 @@
-.loading-overlay{
 
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(255, 255, 255, 0.95);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 1000;
+ion-content.loading-overlay{
 
-	.loading-content{
+    --background: rgba(255, 255, 255, 0.9);
+    
+    .loading-content{
 
-		text-align: center;
-		
-		ion-spinner{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        
+        ion-spinner{
 
-			width: 48px;
-			height: 48px;
-			margin-bottom: 16px;
+            width: 64px;
+            height: 64px;
+            color: var(--ion-color-primary);
 
-		}
+        }
 
-		p{
+    }
 
-			color: var(--ion-color-dark);
-			font-size: 1.1em;
+}
 
-		}
+@keyframes pulse{
 
-	}
+    0% { transform: scale(0.95); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(0.95); }
+
+}
+
+ion-spinner{
+
+    animation: pulse 1.5s ease-in-out infinite;
+
+}
+
+.dark-mode .loading-overlay{
+
+    --background: rgba(0, 0, 0, 0.85);
+    
+    ion-spinner{
+
+        color: var(--ion-color-light);
+
+    }
 
 }

@@ -1,4 +1,3 @@
-<app-header title="Receipt" [showBackButton]="false"></app-header>
 
 <ion-content class="receipt-content">
 
@@ -71,6 +70,13 @@
 
 					<ion-icon name="print" slot="start"></ion-icon>
 					Imprimir
+
+				</ion-button>
+
+				<ion-button fill="solid" [routerLink]="['/home']">
+
+					<ion-icon name="home" slot="start"></ion-icon>
+					Home
 
 				</ion-button>
 

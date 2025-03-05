@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoadingService } from '@services/loading/loading.service';
 
 @Component({
 
@@ -8,23 +7,8 @@ import { LoadingService } from '@services/loading/loading.service';
 	styleUrls: ['app.component.scss'],
 	standalone: false
 
-}) export class AppComponent{
+}) export class AppComponent {
 
-	public constructor(private load: LoadingService){
-
-		/*if (!localStorage.getItem('appInitialized')){
-
-			localStorage.setItem('appInitialized', 'true');
-
-			this.load.showLoading({
-
-				duration: 3000,
-				redirectTo: '/home'
-
-			});
-
-		}*/
-
-	}
+	public constructor(){}
 
 }

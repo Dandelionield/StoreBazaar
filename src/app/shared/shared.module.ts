@@ -14,7 +14,6 @@ import { ItemComponent } from '@components/item/item.component';
 import { ApiService } from '@services/api/api.service';
 import { FilterService } from '@services/filter/filter.service';
 import { CartService } from '@services/cart/cart.service';
-import { LoadingService } from '@services/loading/loading.service';
 
 import { PaymentController } from '@controllers/payment/payment.controller';
 
@@ -52,7 +51,6 @@ import { PaymentController } from '@controllers/payment/payment.controller';
 		ApiService,
 		FilterService,
 		CartService,
-		LoadingService,
 		PaymentController
 
 	]
